@@ -39,6 +39,7 @@ ArrayAndSize* ArrayAndSizeCtor(){
         array_size->array[count] = temp;
         count++;
     }
+    array_size->size = count;
     return array_size;
 }
 

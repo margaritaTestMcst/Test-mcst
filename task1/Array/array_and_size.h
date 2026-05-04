@@ -6,6 +6,7 @@
 typedef struct ArrayAndSize {
     int* array;
     size_t capacity;
+    size_t size;
 } ArrayAndSize;
 
 ArrayAndSize* ArrayAndSizeCtor();
