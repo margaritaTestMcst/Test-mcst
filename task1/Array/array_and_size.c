@@ -22,12 +22,12 @@ ArrayAndSize* ArrayAndSizeCtor(){
     array_size->array = ints;
     array_size->capacity = 10;
 
-    int count = 0;
+    size_t count = 0;
     int temp = 0;
 
     while(true){
         if(scanf("%d", &temp)!=1){
-            return array_size;
+            break;
         }
         if(count + 1 == array_size->capacity){
             if(!RecallocInts(array_size)){
@@ -57,6 +57,13 @@ static bool RecallocInts(ArrayAndSize* array_size){
     array_size->capacity*= 2;
 
     return true;
+}
+
+void ArrayAndSizeDump(ArrayAndSize* array_size){
+    assert(array_size);
+    for(size_t i = 0; i < array_size->size; i++){
+        printf("%d ", array_size->array[i]);
+    }
 }
 
 void ArrayAndSizeDtor(ArrayAndSize* array_size){

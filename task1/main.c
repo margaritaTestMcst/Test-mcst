@@ -13,13 +13,19 @@ int main(int argc, char** argv){
         return 0;
     }
 
+    long threads_wanted = 0;
+    ParseCmdlineArg(argv[1], &threads_wanted);
+
     ArrayAndSize* array = ArrayAndSizeCtor();
     if(!array) return 0;
 
-    long threads_wanted = 0;
-    ParseCmdlineArg(argv[2], &threads_wanted);
+    long threads = ChooseNumOfThreads(array, threads_wanted);
 
-    int threads = ChooseNumOfThreads(array, threads_wanted);
+    FirstVersionParallelSort(array, threads);
+
+    ArrayAndSizeDump(array);
+
+    ArrayAndSizeDtor(array);
 
 }
 
@@ -28,7 +34,7 @@ bool ParseCmdlineArg(char* arg, long* value){
     assert(value);
     char* endptr = NULL;
 
-    long x = strtol(arg, &endptr, 10);
+    *value = strtol(arg, &endptr, 10);
 
     if(endptr==arg){
         fprintf(stderr, "Error: not a number\n");

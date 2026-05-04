@@ -6,10 +6,12 @@
 
 typedef struct ThreadTask{
     int* array;
-    size_t left;
-    size_t right;
+    long left;
+    long right;
 } ThreadTask;
 
 long ChooseNumOfThreads(ArrayAndSize* array_size, long threads);
+
+void FirstVersionParallelSort(ArrayAndSize* array_size, long threads);
 
 #endif //THREADS

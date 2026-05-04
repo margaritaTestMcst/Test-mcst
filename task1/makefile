@@ -7,10 +7,10 @@ BASE_CFLAGS = -ggdb3 -std=c++20 -O0 -Wall -Wextra -Weffc++ -Wc++14-compat -Wmiss
 all: task1
 
 task1: $(SRC)
-	$(CC) -O2 -Wall -Wextra  $(CFLAGS) $(SRC) -o task1 -pthread
+	$(CC) -O2 -Wall -Wextra  $(CFLAGS) $(SRC) -o task1 -pthread -lbsd
 
 task1_dbg: $(SRC)
-	$(CC) -O2 $(BASE_CFLAGS) $(SRC) -o task1 -pthread
+	$(CC) -O2 $(BASE_CFLAGS) $(SRC) -o task1_dbg -pthread -lbsd
 
 clean:
 	rm -f task1 task1_dbg

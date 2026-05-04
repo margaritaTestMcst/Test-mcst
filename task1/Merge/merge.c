@@ -4,7 +4,7 @@ static void append_data(int *dst, long *dst_idx, int *src, long *src_idx, long e
 
 static void merge(int *arr, int *tmp, long left_begin, long medium, long right_end);
 
-void merge_all_parts(ArrayAndSize *array_size, int *tmp, long *bounds, int parts_count){
+void merge_all_parts(ArrayAndSize *array_size, int *tmp, long *bounds, long parts_count){
     while(parts_count > 1){
         int new_parts_count = 0;
 
@@ -58,8 +58,8 @@ static void merge(int *arr, int *tmp, long left_begin, long medium, long right_e
         arr_right++;
     }
 
-    append_data(tmp, &right_end, arr, &arr_right, medium);
-    append_data(tmp, &right_end, arr, &arr_right, right_end);
+    append_data(tmp, &tmp_left, arr, &arr_left, medium);
+    append_data(tmp, &tmp_left, arr, &arr_right, right_end);
 
 	for(long idx = left_begin; idx < right_end; idx++){
     	arr[idx] = tmp[idx];

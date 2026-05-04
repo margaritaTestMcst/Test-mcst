@@ -14,7 +14,7 @@ long ChooseNumOfThreads(ArrayAndSize* array_size, long threads){
         return 16; //на моем процессоре 16 ядер, и желательно не допускать, чтобы потоков было сильно больше, чем ядер
     }
 
-    int size_div_two = array_size->size / 2;
+    long size_div_two = array_size->size / 2;
     if(threads > size_div_two){
         return size_div_two; // нужно чтобы базово в самом минимальном подмассиве было 2 элемента
     }
@@ -55,7 +55,7 @@ void FirstVersionParallelSort(ArrayAndSize* array_size, long threads){
     }
 
     for(long i = 0; i <= threads; i++) {
-        end_parts[i] = i * array_size->size / threads;
+        end_parts[i] = i * (long)array_size->size / threads;
     }
 
     for(int i = 0; i < threads; i++){
@@ -70,11 +70,12 @@ void FirstVersionParallelSort(ArrayAndSize* array_size, long threads){
         pthread_join(thread_id[i], NULL);
     }
 
-    int* tmp = (int*)calloc(sizeof(ThreadTask), array_size->size);
+    free(tasks);
+    free(thread_id);
+
+    int* tmp = (int*)calloc(sizeof(int), array_size->size);
     if(!tmp){
         fprintf(stderr, "Error: can't allocate int* tmp\n");
-        free(tasks);
-        free(thread_id);
         free(end_parts);
         return;
     }
@@ -82,6 +83,7 @@ void FirstVersionParallelSort(ArrayAndSize* array_size, long threads){
     merge_all_parts(array_size, tmp, end_parts, threads);
 
     free(tmp);
+    free(end_parts);
 }
 
 static int CompareInts(const void* a, const void* b){
@@ -93,7 +95,7 @@ static int CompareInts(const void* a, const void* b){
 static void* ThreadSortFunc(void* arg){
     ThreadTask* task = (ThreadTask*)arg;
 
-    qsort(task->array + task->left, task->right - task->left, sizeof(int), CompareInts);
+    qsort(task->array + task->left, (size_t)(task->right - task->left), sizeof(int), CompareInts);
 
     return NULL;
 }

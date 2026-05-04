@@ -11,6 +11,8 @@ typedef struct ArrayAndSize {
 
 ArrayAndSize* ArrayAndSizeCtor();
 
+void ArrayAndSizeDump(ArrayAndSize* array_size);
+
 void ArrayAndSizeDtor(ArrayAndSize* array_size);
 
 #endif //ARRAY_SIZE
