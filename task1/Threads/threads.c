@@ -22,8 +22,7 @@ long ChooseNumOfThreads(ArrayAndSize* array_size, long threads){
     return threads;
 }
 
-// Sorting =====================================================================================================
-// тут пока самая базовая версия - мы параллельно сортируем маленькие части массивов, а потом сливаем в один большой, если хватит времени, то сделаю многопоточный merge sort
+// Sorting small arrays =====================================================================================================
 
 static void* ThreadSortFunc(void* arg);
 
@@ -80,7 +79,7 @@ void FirstVersionParallelSort(ArrayAndSize* array_size, long threads){
         return;
     }
 
-    merge_all_parts(array_size, tmp, end_parts, threads);
+    ParallelMergeAllParts(array_size, tmp, end_parts, threads);
 
     free(tmp);
     free(end_parts);
