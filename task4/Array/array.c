@@ -1,21 +1,25 @@
 #include "array.h"
+#include <stdint.h>
 #include <stdio.h>
 #include <assert.h>
+#include <string.h>
 
 
 static bool RecallocArr(ArrayAndSize* array_size);
 
-ArrayAndSize* ArrayAndSizeCtor(){
-    ArrayAndSize* array_size = (ArrayAndSize*)canary_calloc(1, sizeof(ArrayAndSize));
+ArrayAndSize* ArrayAndSizeCtor(size_t size_of_elem){
+    assert(size_of_elem > 0 && size_of_elem <= 0.8 * SIZE_MAX);
+
+    ArrayAndSize* array_size = (ArrayAndSize*)calloc(1, sizeof(ArrayAndSize));
     if(!array_size){
         fprintf(stderr, "Error: can't alloc ArrayAndSize struct\n");
         return NULL;
     }
 
-    char** array = (char**)canary_calloc(sizeof(char*), 10);
+    void* array = calloc(10, size_of_elem);
     if(!array){
         fprintf(stderr, "Error: can't alloc char** array in ArrayAndSize struct\n");
-        canary_free(array_size, sizeof(ArrayAndSize));
+        free(array_size);
         return NULL;
     }
 
@@ -26,9 +30,8 @@ ArrayAndSize* ArrayAndSizeCtor(){
 }
 
 
-bool ArrayAndSizeInsert(ArrayAndSize* array_size, char* str){
+bool ArrayAndSizeInsert(ArrayAndSize* array_size, const void* elem){
     assert(array_size);
-    assert(canary_verify(array_size->array, sizeof(char*) * array_size->capacity) == NO_MISTAKE_CANARY);
 
     if(array_size->capacity == array_size->size){
         bool could_realloc = RecallocArr(array_size);
@@ -37,10 +40,8 @@ bool ArrayAndSizeInsert(ArrayAndSize* array_size, char* str){
 
     assert(array_size->capacity != array_size->size);
 
-    array_size->array[array_size->size] = str;
+    memcpy(array_size->array + array_size->size * array_size->size_of_elem, elem, array_size->size_of_elem);
     array_size->size++;
-
-    assert(canary_verify(array_size->array, sizeof(char*) * array_size->capacity) == NO_MISTAKE_CANARY);
 
     return true;
 }
@@ -48,7 +49,7 @@ bool ArrayAndSizeInsert(ArrayAndSize* array_size, char* str){
 static bool RecallocArr(ArrayAndSize* array_size){
     assert(array_size);
 
-    char** array = (char**)canary_recalloc(array_size->array, array_size->capacity, array_size->capacity*2,  sizeof(char*));
+    void* array = recallocarray(array_size->array, array_size->capacity, array_size->capacity*2, array_size->size_of_elem);
     if(!array){
         fprintf(stderr, "Error: can't realloc int* array in ArrayAndSize struct\n");
         return false;
@@ -62,6 +63,6 @@ static bool RecallocArr(ArrayAndSize* array_size){
 
 void ArrayAndSizeDtor(ArrayAndSize* array_size){
     if(!array_size) return;
-    if(array_size->array) canary_free(array_size->array, sizeof(char*) * array_size->capacity);
-    canary_free(array_size, sizeof(ArrayAndSize));
+    if(array_size->array) free(array_size->array);
+    free(array_size);
 }

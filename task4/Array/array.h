@@ -3,17 +3,17 @@
 
 #include <bsd/stdlib.h>
 #include <stdbool.h>
-#include "../my_canary_std_func/my_canary_std_func.h"
 
 typedef struct ArrayAndSize {
-    char** array;
+    void* array;
+    size_t size_of_elem;
     size_t capacity;
     size_t size;
 } ArrayAndSize;
 
-ArrayAndSize* ArrayAndSizeCtor();
+ArrayAndSize* ArrayAndSizeCtor(size_t size_of_elem);
 
-bool ArrayAndSizeInsert(ArrayAndSize* array_size, char* str);
+bool ArrayAndSizeInsert(ArrayAndSize* array_size, const void* elem);
 
 void ArrayAndSizeDtor(ArrayAndSize* array_size);
 
