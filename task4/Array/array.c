@@ -39,8 +39,9 @@ bool ArrayAndSizeInsert(ArrayAndSize* array_size, const void* elem){
     }
 
     assert(array_size->capacity != array_size->size);
+    char* data = (char*)array_size->array;
 
-    memcpy(array_size->array + array_size->size * array_size->size_of_elem, elem, array_size->size_of_elem);
+    memcpy(data + array_size->size * array_size->size_of_elem, elem, array_size->size_of_elem);
     array_size->size++;
 
     return true;

@@ -5,7 +5,8 @@ const char* const SHORT_OPTS = "mcst";
 const size_t ELBRUS_NUM = 6969;
 
 const struct option long_options[] ={
-    {"elbrus", required_argument, 0, ELBRUS_NUM}
+    {"elbrus", required_argument, 0, ELBRUS_NUM},
+    {0, 0, 0, 0}
 };
 
 
@@ -14,19 +15,20 @@ static void parse_incorrect(char** argv);
 static bool is_valid_elbrus(const char *value);
 
 bool get_arguments(int argc, char** argv, ArrayAndSize* array_short, ArrayAndSize* array_long){
-    int opterr = 0;
+    opterr = 0;
     int opt = 0;
     while((opt = getopt_long(argc, argv, SHORT_OPTS, long_options, NULL)) != -1){
         if(opt == 'm' || opt == 'c' || opt == 's' || opt == 't'){
-            ArrayAndSizeInsert(array_short, &opt);
+            char short_opt = (char)opt;
+            if(!ArrayAndSizeInsert(array_short, &short_opt)) return false;
             continue;
         }
         if(opt == ELBRUS_NUM){
             if(!is_valid_elbrus(optarg)){
-                fprintf(stderr, "Incorrect option: elbrus=%s", optarg);
+                printf("Incorrect option: elbrus=%s", optarg);
                 return false;
             }
-            ArrayAndSizeInsert(array_long, optarg);
+            if(!ArrayAndSizeInsert(array_long, &optarg)) return false;
             continue;
         }
 
@@ -50,18 +52,19 @@ static bool is_valid_elbrus(const char *value){
 
 static void parse_incorrect(char** argv){
     if(optopt != 0){
-        fprintf(stderr, "Incorrect option: %c", optopt);
+        printf( "Incorrect option: %c", optopt);
         return;
     }
 
     char* incorrect = argv[optind - 1];
     if(incorrect[0] == '-'){
         if(incorrect[1] == '-'){
-            fprintf(stderr, "Incorrect option: %s", incorrect + 2*sizeof(char));
+            printf("Incorrect option: %s", incorrect + 2*sizeof(char));
             return;
         }
-        fprintf(stderr, "Incorrect option: %s", incorrect + sizeof(char));
+        printf( "Incorrect option: %s", incorrect + sizeof(char));
+        return;
     }
 
-    fprintf(stderr, "Incorrect option: %s", incorrect);
+    printf("Incorrect option: %s", incorrect);
 }
