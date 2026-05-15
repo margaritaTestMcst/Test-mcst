@@ -23,6 +23,7 @@ ArrayAndSize* ArrayAndSizeCtor(size_t size_of_elem){
         return NULL;
     }
 
+    array_size->size_of_elem = size_of_elem;
     array_size->array = array;
     array_size->capacity = 10;
 

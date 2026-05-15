@@ -2,7 +2,7 @@
 
 const char* const SHORT_OPTS = "mcst";
 
-const size_t ELBRUS_NUM = 6969;
+const int ELBRUS_NUM = 6969;
 
 const struct option long_options[] ={
     {"elbrus", required_argument, 0, ELBRUS_NUM},
@@ -25,7 +25,7 @@ bool get_arguments(int argc, char** argv, ArrayAndSize* array_short, ArrayAndSiz
         }
         if(opt == ELBRUS_NUM){
             if(!is_valid_elbrus(optarg)){
-                printf("Incorrect option: elbrus=%s", optarg);
+                printf("Incorrect option: elbrus=%s\n", optarg);
                 return false;
             }
             if(!ArrayAndSizeInsert(array_long, &optarg)) return false;
@@ -52,19 +52,15 @@ static bool is_valid_elbrus(const char *value){
 
 static void parse_incorrect(char** argv){
     if(optopt != 0){
-        printf( "Incorrect option: %c", optopt);
+        printf( "Incorrect option: %c\n", optopt);
         return;
     }
 
     char* incorrect = argv[optind - 1];
-    if(incorrect[0] == '-'){
-        if(incorrect[1] == '-'){
-            printf("Incorrect option: %s", incorrect + 2*sizeof(char));
-            return;
-        }
-        printf( "Incorrect option: %s", incorrect + sizeof(char));
+    if(incorrect[0] == '-' && incorrect[1] == '-'){
+        printf("Incorrect option: %s\n", incorrect + 2*sizeof(char));
         return;
     }
 
-    printf("Incorrect option: %s", incorrect);
+    printf("Incorrect option: %s\n", incorrect);
 }

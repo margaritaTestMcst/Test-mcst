@@ -31,7 +31,7 @@ void print_result(int argc, char** argv, ArrayAndSize* array_short, ArrayAndSize
     }
     printf("\n");
 
-    printf("Long options: ");
+    printf("Long options:");
     char** longs = (char**)array_long->array;
     for(size_t idx=0; idx < array_long->size; idx++){
        printf(" 'elbrus=%s'", longs[idx]);
@@ -39,7 +39,7 @@ void print_result(int argc, char** argv, ArrayAndSize* array_short, ArrayAndSize
     printf("\n");
 
     printf("Non options:");
-    for(size_t idx=optind; idx < argc; idx++){
+    for(int idx=optind; idx < argc; idx++){
        printf(" '%s'", argv[idx]);
     }
     printf("\n");
