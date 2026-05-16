@@ -1,6 +1,6 @@
 #include <assert.h>
 #include "print_node.h"
-#include "../../include/operators_func.h"
+#include "../include/operators_func.h"
 
 //----------------------------------------------------------------
 // Dumping tree
@@ -26,7 +26,7 @@ TreeErr_t PrintNode(const TreeNode_t* node, FILE* dot_file, int* rank){
     }
     else{
         if(node->type == VARIABLE){
-            fprintf(dot_file, " node_%p[shape=\"Mrecord\", style=\"filled\", fillcolor=\"#DAA520\", rank=%d, color = \"#964B00\", penwidth=1.0, label=\"{{type = VARIABLE} | {val = %lu} | {0 | 0}} \"];\n", node, *rank, node->data.var_code);
+            fprintf(dot_file, " node_%p[shape=\"Mrecord\", style=\"filled\", fillcolor=\"#DAA520\", rank=%d, color = \"#964B00\", penwidth=1.0, label=\"{{type = VARIABLE} | {val = %c} | {0 | 0}} \"];\n", node, *rank, node->data.var_name);
         }
     }
 

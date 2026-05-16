@@ -6,12 +6,12 @@
 #include <assert.h>
 
 metki* MetkiInit(){
-    metki* mtk = (metki*)calloc(sizeof(metki), 1);
+    metki* mtk = (metki*)calloc(1,sizeof(metki));
     if(!mtk){
         return NULL;
     }
 
-    variables* metki_arr = (variables*)calloc(sizeof(variables), MAX_NUMBER_OF_METKI); 
+    variables* metki_arr = (variables*)calloc(MAX_NUMBER_OF_METKI, sizeof(variables)); 
     if(!metki_arr){
         free(mtk);
         return NULL;

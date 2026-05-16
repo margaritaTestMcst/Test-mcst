@@ -20,7 +20,7 @@ enum OPERATORS
 
 union TreeElem_t{
     enum OPERATORS op;
-    size_t var_code; 
+    char var_name; 
 };
 
 #ifdef _DEBUG_SMALL_TREE

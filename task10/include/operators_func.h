@@ -22,7 +22,7 @@ struct op_info{
 };
 
 const op_info OPERATORS_INFO[] = {
-    {INCORR},
+    {INCORR,NULL,  0,  NULL,     CALCUL(NULL)},
     {OP_AND,         "AND",                     sizeof("AND")                     - 1,  "OP_AND",  CALCUL(CalcAnd)},
     {OP_OR,          "OR",                      sizeof("OR")                      - 1,  "OP_OR",  CALCUL(CalcOr)},
     {OP_NOT,         "NOT",                     sizeof("NOT")                     - 1,  "OP_NOT",  CALCUL(CalcNot)},

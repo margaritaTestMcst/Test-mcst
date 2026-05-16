@@ -1,0 +1,20 @@
+digraph G{
+ rankdir=TB;
+ charset="utf-8";
+ graph [bgcolor="#FFFAFA", nodesep = 0.3, ranksep=0.8];
+ node_0x7b4b023e0150 -> node_0x7b4b023e0090[color = "#964B00", dir = both];
+ node_0x7b4b023e0090 -> node_0x7b4b023e0050[color = "#964B00", dir = both];
+ node_0x7b4b023e0050[shape="Mrecord", style="filled", fillcolor="#DAA520", rank=3, color = "#964B00", penwidth=1.0, label="{{type = VARIABLE} | {val = A} | {0 | 0}} "];
+ node_0x7b4b023e0090[shape="Mrecord", style="filled", fillcolor="#00FFFF", rank=2, color = "#964B00", penwidth=1.0, label="{{type = OPERATOR} | {val = 1(OP_AND)} | {L | R }} "];
+ node_0x7b4b023e0090 -> node_0x7b4b023e00d0[color = "#964B00", dir = both];
+ node_0x7b4b023e00d0[shape="Mrecord", style="filled", fillcolor="#DAA520", rank=3, color = "#964B00", penwidth=1.0, label="{{type = VARIABLE} | {val = B} | {0 | 0}} "];
+ node_0x7b4b023e0150[shape="Mrecord", style="filled", fillcolor="#00FFFF", rank=1, color = "#964B00", penwidth=1.0, label="{{type = OPERATOR} | {val = 2(OP_OR)} | {L | R }} "];
+ node_0x7b4b023e0150 -> node_0x7b4b023e0210[color = "#964B00", dir = both];
+ node_0x7b4b023e0210 -> node_0x7b4b023e01d0[color = "#964B00", dir = both];
+ node_0x7b4b023e01d0[shape="Mrecord", style="filled", fillcolor="#DAA520", rank=3, color = "#964B00", penwidth=1.0, label="{{type = VARIABLE} | {val = C} | {0 | 0}} "];
+ node_0x7b4b023e0210[shape="Mrecord", style="filled", fillcolor="#00FFFF", rank=2, color = "#964B00", penwidth=1.0, label="{{type = OPERATOR} | {val = 1(OP_AND)} | {L | R }} "];
+ node_0x7b4b023e0210 -> node_0x7b4b023e0250[color = "#964B00", dir = both];
+ node_0x7b4b023e0250 -> node_0x7b4b023e0290[color = "#964B00", dir = both];
+ node_0x7b4b023e0290[shape="Mrecord", style="filled", fillcolor="#DAA520", rank=4, color = "#964B00", penwidth=1.0, label="{{type = VARIABLE} | {val = D} | {0 | 0}} "];
+ node_0x7b4b023e0250[shape="Mrecord", style="filled", fillcolor="#00FFFF", rank=3, color = "#964B00", penwidth=1.0, label="{{type = OPERATOR} | {val = 3(OP_NOT)} | {L | R }} "];
+}

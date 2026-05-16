@@ -1,7 +1,7 @@
 #ifndef GRAPHVIZ_DUMP_H
 #define GRAPHVIZ_DUMP_H
 #include <string.h>
-#include "../../tree/tree.h"
+#include "../tree/tree.h"
 
 const char* const LOG_FILE = "log.htm";
 

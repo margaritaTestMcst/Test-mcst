@@ -9,7 +9,6 @@
     do{\
         function;\
         if(*err){ \
-            fprintf(stderr, "err = %llu, %s, %s, %d\n", *err, __FILE__, __func__, __LINE__); \
             return;                                                         \
         } \
     }while(0)
@@ -61,8 +60,6 @@ void CalcTreeExpression(TreeNode_t* node, metki* mtk, int* result, TreeErr_t* er
 
 static void CalcExpWithOperator(TreeNode_t *node, int *result, int *left_result, int *right_result, TreeErr_t* err);
 
-static void CalcExpWithConst(TreeNode_t* node, int*result);
-
 static void CalcExpWithVar(metki* mtk, TreeNode_t* node, int*result, TreeErr_t* err);
 
 static void CalcTreeExpressionRecursive(metki* mtk, TreeNode_t* node, int*result, TreeErr_t* err){
@@ -110,20 +107,21 @@ static void CalcExpWithVar(metki* mtk, TreeNode_t* node, int*result, TreeErr_t* 
     if(*err) return;
     assert(mtk); assert(result);
 
-    if(node->data.var_code >= mtk->num_of_metki){
+    size_t var_idx = FindVarInMtkArr(mtk, node->data.var_name);
+
+    if(var_idx >= mtk->num_of_metki){
         *err = INCORR_IDX_IN_MTK;
         return;
     }
-    if(!mtk->var_info[node->data.var_code].variable_name){
+    if(!mtk->var_info[var_idx].variable_name){
         *err = CANT_GET_VALUE_FOR_NULL_NAME_IN_MTK;
         return;
     }
-    *result = mtk->var_info[node->data.var_code].value;
+    *result = mtk->var_info[var_idx].value;
 }
 
 //-----------------------------------------------------------------------------
 // Undef dsl
-#undef IS_EQUAL
 #undef RES_L
 #undef RES_R
 #undef DEF_OP

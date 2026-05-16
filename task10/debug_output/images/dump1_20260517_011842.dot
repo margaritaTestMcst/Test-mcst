@@ -1,0 +1,22 @@
+digraph G{
+ rankdir=TB;
+ charset="utf-8";
+ graph [bgcolor="#FFFAFA", nodesep = 0.3, ranksep=0.8];
+ node_0x55db8d3bc750 -> node_0x55db8d3bc6f0[color = "#964B00", dir = both];
+ node_0x55db8d3bc6f0 -> node_0x55db8d3bc690[color = "#964B00", dir = both];
+ node_0x55db8d3bc690 -> node_0x55db8d3bc630[color = "#964B00", dir = both];
+ node_0x55db8d3bc630 -> node_0x55db8d3bc600[color = "#964B00", dir = both];
+ node_0x55db8d3bc600[shape="Mrecord", style="filled", fillcolor="#DAA520", rank=5, color = "#964B00", penwidth=1.0, label="{{type = VARIABLE} | {val = A} | {0 | 0}} "];
+ node_0x55db8d3bc630[shape="Mrecord", style="filled", fillcolor="#00FFFF", rank=4, color = "#964B00", penwidth=1.0, label="{{type = OPERATOR} | {val = 2(OP_OR)} | {L | R }} "];
+ node_0x55db8d3bc630 -> node_0x55db8d3bc660[color = "#964B00", dir = both];
+ node_0x55db8d3bc660[shape="Mrecord", style="filled", fillcolor="#DAA520", rank=5, color = "#964B00", penwidth=1.0, label="{{type = VARIABLE} | {val = B} | {0 | 0}} "];
+ node_0x55db8d3bc690[shape="Mrecord", style="filled", fillcolor="#00FFFF", rank=3, color = "#964B00", penwidth=1.0, label="{{type = OPERATOR} | {val = 2(OP_OR)} | {L | R }} "];
+ node_0x55db8d3bc690 -> node_0x55db8d3bc6c0[color = "#964B00", dir = both];
+ node_0x55db8d3bc6c0[shape="Mrecord", style="filled", fillcolor="#DAA520", rank=4, color = "#964B00", penwidth=1.0, label="{{type = VARIABLE} | {val = C} | {0 | 0}} "];
+ node_0x55db8d3bc6f0[shape="Mrecord", style="filled", fillcolor="#00FFFF", rank=2, color = "#964B00", penwidth=1.0, label="{{type = OPERATOR} | {val = 2(OP_OR)} | {L | R }} "];
+ node_0x55db8d3bc6f0 -> node_0x55db8d3bc720[color = "#964B00", dir = both];
+ node_0x55db8d3bc720[shape="Mrecord", style="filled", fillcolor="#DAA520", rank=3, color = "#964B00", penwidth=1.0, label="{{type = VARIABLE} | {val = D} | {0 | 0}} "];
+ node_0x55db8d3bc750[shape="Mrecord", style="filled", fillcolor="#00FFFF", rank=1, color = "#964B00", penwidth=1.0, label="{{type = OPERATOR} | {val = 2(OP_OR)} | {L | R }} "];
+ node_0x55db8d3bc750 -> node_0x55db8d3bc780[color = "#964B00", dir = both];
+ node_0x55db8d3bc780[shape="Mrecord", style="filled", fillcolor="#DAA520", rank=2, color = "#964B00", penwidth=1.0, label="{{type = VARIABLE} | {val = E} | {0 | 0}} "];
+}

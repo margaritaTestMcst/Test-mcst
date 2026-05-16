@@ -3,13 +3,9 @@
 #include "make_ast/tokenizing/tokenize.h"
 #include "make_ast/syntax_parse/make_tokens_tree.h"
 #include "metki/metki.h"
+#include "result_table/result_table.h"
 
-
-int main(int argc, char* argv[]){
-    if(argc != 2){
-        fprintf(stderr, "Can't parse name of the file frontend\n");
-        return 0;
-    }
+int main(){
 
     DEBUG_TREE(
     if(find_operators_info_mistake() || find_functions_info_mistake()){
@@ -23,7 +19,7 @@ int main(int argc, char* argv[]){
     }
     */
 
-    char* buffer = read_file_to_string_array(argv[1]);
+    char* buffer = read_stdin_to_string_array();
     if(!buffer) return 1;
 
     metki* mtk = MetkiInit();
@@ -34,26 +30,32 @@ int main(int argc, char* argv[]){
 
     Tokens_t* tokens = TokenizeInput(buffer, mtk);
     if(!tokens){
-        free(buffer);
-        free(mtk);
+        MetkiDestroy(mtk);
         return 1;
     }
 
     // DEBUG FOR TOKENS
     /*
-    for(int i = 0; i < tokens->num_of_nodes; i++){
+    for(int i = 0; i < tokens->first_free_place; i++){
         tree_dump_func(tokens->node_arr[i], __FILE__, __func__, __LINE__, "%d pos", i);
     }
     */
     TreeHead_t* head = MakeLangExprTokens(tokens);
     if(!head){
-        free(buffer);
-        free(mtk);
-        // tokens were already deleted in  MakeLangExprTokens
+        MetkiDestroy(mtk);
+        // tokens and buffer were already deleted in  MakeLangExprTokens
+        return 1;
+    }
+
+    if(!print_table(head, mtk)){
+        free(head);
+        TokensDtor(tokens);
+        MetkiDestroy(mtk);
         return 1;
     }
 
     free(head);
     TokensDtor(tokens);
+    MetkiDestroy(mtk);
     return 0;
 }

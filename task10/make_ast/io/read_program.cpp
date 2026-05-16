@@ -12,46 +12,18 @@
 //-----------------------------------------------------------------------------------------
 // Creating buffer for reading program info from disk
 
-static bool is_stat_err(const char *name_of_file, struct stat *all_info_about_file);
+char* read_stdin_to_string_array(){
+    char* buffer = NULL;
+    size_t capacity = 0;
 
-char* read_file_to_string_array(const char *name_of_file){
-    assert(name_of_file != NULL);
-    FILE *fptr = fopen(name_of_file, "r");
-    if(!fptr){
-        fprintf(stderr, "Can't open file\n");
+    ssize_t len = getline(&buffer, &capacity, stdin);
+
+    if(len == -1){
+        free(buffer);
         return NULL;
     }
 
-    struct stat file_info = {};
-    if(is_stat_err(name_of_file, &(file_info))){
-        return NULL;
-    }
-
-    char *all_strings_in_file = (char *)calloc(file_info.st_size + 1, sizeof(char));
-    if(!all_strings_in_file){
-        fprintf(stderr, "Array for strings allocation error\n");
-        return NULL;
-    }
-
-    if(fread(all_strings_in_file, sizeof(char), file_info.st_size, fptr) != file_info.st_size){
-        fprintf(stderr, "Can't read all symbols from file\n");
-        return NULL;
-    }
-
-    fclose(fptr);
-    return all_strings_in_file;
-}
-
-static bool is_stat_err(const char *name_of_file, struct stat *all_info_about_file){
-    assert(name_of_file != NULL);
-    assert(all_info_about_file != NULL);
-
-    if (stat(name_of_file, all_info_about_file) == -1){
-        perror("Stat error");
-        fprintf(stderr, "Error code: %d\n", errno);
-        return true;
-    }
-    return false;
+    return buffer;
 }
 
 void buffer_free(char* buffer){

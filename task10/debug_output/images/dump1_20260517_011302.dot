@@ -1,0 +1,22 @@
+digraph G{
+ rankdir=TB;
+ charset="utf-8";
+ graph [bgcolor="#FFFAFA", nodesep = 0.3, ranksep=0.8];
+ node_0x7b70365e0010 -> node_0x7b70365e01d0[color = "#964B00", dir = both];
+ node_0x7b70365e01d0 -> node_0x7b70365e0110[color = "#964B00", dir = both];
+ node_0x7b70365e0110 -> node_0x7b70365e00d0[color = "#964B00", dir = both];
+ node_0x7b70365e00d0[shape="Mrecord", style="filled", fillcolor="#DAA520", rank=4, color = "#964B00", penwidth=1.0, label="{{type = VARIABLE} | {val = A} | {0 | 0}} "];
+ node_0x7b70365e0110[shape="Mrecord", style="filled", fillcolor="#00FFFF", rank=3, color = "#964B00", penwidth=1.0, label="{{type = OPERATOR} | {val = 2(OP_OR)} | {L | R }} "];
+ node_0x7b70365e0110 -> node_0x7b70365e0150[color = "#964B00", dir = both];
+ node_0x7b70365e0150[shape="Mrecord", style="filled", fillcolor="#DAA520", rank=4, color = "#964B00", penwidth=1.0, label="{{type = VARIABLE} | {val = B} | {0 | 0}} "];
+ node_0x7b70365e01d0[shape="Mrecord", style="filled", fillcolor="#00FFFF", rank=2, color = "#964B00", penwidth=1.0, label="{{type = OPERATOR} | {val = 1(OP_AND)} | {L | R }} "];
+ node_0x7b70365e01d0 -> node_0x7b70365e0290[color = "#964B00", dir = both];
+ node_0x7b70365e0290 -> node_0x7b70365e0250[color = "#964B00", dir = both];
+ node_0x7b70365e0250[shape="Mrecord", style="filled", fillcolor="#DAA520", rank=4, color = "#964B00", penwidth=1.0, label="{{type = VARIABLE} | {val = C} | {0 | 0}} "];
+ node_0x7b70365e0290[shape="Mrecord", style="filled", fillcolor="#00FFFF", rank=3, color = "#964B00", penwidth=1.0, label="{{type = OPERATOR} | {val = 2(OP_OR)} | {L | R }} "];
+ node_0x7b70365e0290 -> node_0x7b70365e02d0[color = "#964B00", dir = both];
+ node_0x7b70365e02d0 -> node_0x7b70365e0310[color = "#964B00", dir = both];
+ node_0x7b70365e0310[shape="Mrecord", style="filled", fillcolor="#DAA520", rank=5, color = "#964B00", penwidth=1.0, label="{{type = VARIABLE} | {val = D} | {0 | 0}} "];
+ node_0x7b70365e02d0[shape="Mrecord", style="filled", fillcolor="#00FFFF", rank=4, color = "#964B00", penwidth=1.0, label="{{type = OPERATOR} | {val = 3(OP_NOT)} | {L | R }} "];
+ node_0x7b70365e0010[shape="Mrecord", style="filled", fillcolor="#00FFFF", rank=1, color = "#964B00", penwidth=1.0, label="{{type = OPERATOR} | {val = 3(OP_NOT)} | {L | R }} "];
+}

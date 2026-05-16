@@ -1,0 +1,16 @@
+digraph G{
+ rankdir=TB;
+ charset="utf-8";
+ graph [bgcolor="#FFFAFA", nodesep = 0.3, ranksep=0.8];
+ node_0x7b8421fe0050 -> node_0x7b8421fe0010[color = "#964B00", dir = both];
+ node_0x7b8421fe0010[shape="Mrecord", style="filled", fillcolor="#DAA520", rank=2, color = "#964B00", penwidth=1.0, label="{{type = VARIABLE} | {val = A} | {0 | 0}} "];
+ node_0x7b8421fe0050[shape="Mrecord", style="filled", fillcolor="#00FFFF", rank=1, color = "#964B00", penwidth=1.0, label="{{type = OPERATOR} | {val = 1(OP_AND)} | {L | R }} "];
+ node_0x7b8421fe0050 -> node_0x7b8421fe0090[color = "#964B00", dir = both];
+ node_0x7b8421fe0090 -> node_0x7b8421fe0150[color = "#964B00", dir = both];
+ node_0x7b8421fe0150 -> node_0x7b8421fe0110[color = "#964B00", dir = both];
+ node_0x7b8421fe0110[shape="Mrecord", style="filled", fillcolor="#DAA520", rank=4, color = "#964B00", penwidth=1.0, label="{{type = VARIABLE} | {val = B} | {0 | 0}} "];
+ node_0x7b8421fe0150[shape="Mrecord", style="filled", fillcolor="#00FFFF", rank=3, color = "#964B00", penwidth=1.0, label="{{type = OPERATOR} | {val = 2(OP_OR)} | {L | R }} "];
+ node_0x7b8421fe0150 -> node_0x7b8421fe0190[color = "#964B00", dir = both];
+ node_0x7b8421fe0190[shape="Mrecord", style="filled", fillcolor="#DAA520", rank=4, color = "#964B00", penwidth=1.0, label="{{type = VARIABLE} | {val = C} | {0 | 0}} "];
+ node_0x7b8421fe0090[shape="Mrecord", style="filled", fillcolor="#00FFFF", rank=2, color = "#964B00", penwidth=1.0, label="{{type = OPERATOR} | {val = 3(OP_NOT)} | {L | R }} "];
+}

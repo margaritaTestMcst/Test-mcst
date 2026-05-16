@@ -33,7 +33,7 @@ void tree_dump_func(const TreeNode_t* node, const char *file, const char *func, 
     generate_svg_file(&dump);
     if(dump.svg_filename){
         va_list args = {};
-        va_start(args, line);
+        va_start(args, debug_msg);
         tree_dump_html(dump.svg_filename, debug_msg, file, func, line, args);
         free(dump.svg_filename);
         va_end(args);

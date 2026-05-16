@@ -19,7 +19,8 @@
     do{\
         function;\
         if(*err){ \
-            return NULL;                                                         \
+/*           fprintf(stderr, "err = %lu, %s, %s, %d\n", *err, __FILE__, __func__, __LINE__); \
+            */return NULL;                                                         \
         } \
     }while(0)
 
@@ -27,14 +28,16 @@
     do{\
     *err = (bad_condition);\
         if(*err){ \
-            return val; \
+/*            fprintf(stderr, "err = %lu, %s, %s, %d\n", *err, __FILE__, __func__, __LINE__); \
+            */return val; \
         } \
     }while(0) \
 
 #define FAIL_IF(bad_condition, err_code, is_in_end_of_str)\
     if(bad_condition){ \
         *err = err_code; \
-        return NULL; \
+/*        fprintf(stderr, "err = %lu, %s, %s, %d\n", *err, __FILE__, __func__, __LINE__); \
+        */return NULL; \
     } \
 
 //-------------------------------------------------------------------------------------
@@ -76,6 +79,7 @@ TreeHead_t* MakeLangExprTokens(Tokens_t* tokens){
     size_t pos = 0;
     head->root = GetG(&pos, tokens);
     if(!head->root){
+        free(head);
         return NULL;
     }
 
@@ -170,27 +174,16 @@ static TreeNode_t* GetNOT(size_t* pos, Tokens_t* tokens, SyntaxErr_t* err){
         val = tokens->node_arr[*pos];
         (*pos)++; // skip NOT
 
-        if(IS_OPERATOR_IN_POS(OP_OPEN_BR)) (*pos)++; // skip '('
-
         TreeNode_t* left = NULL;
-        CALL_AND_CHECK_ERR(left = GetE(pos, tokens, err));
-
-        if(IS_OPERATOR_IN_POS(OP_CLOSE_BR)) (*pos)++; // skip ')'
+        CALL_AND_CHECK_ERR(left = GetNOT(pos, tokens, err));
 
         val->left = left;
         left->parent = val;
+
+        return val;
     }
-    else{
-        if(IS_TYPE_IN_POS(VARIABLE)){
-            CALL_AND_CHECK_ERR(val = GetV(pos, tokens, err));
-            (*pos)++;
-        }
-        else{
-            FAIL_IF(true, 
-                    INCORR_OPERAND_NOT_VAR_NOT_NUM, 
-                    false)
-        } 
-    }
+
+    CALL_AND_CHECK_ERR(val = GetP(pos, tokens, err));
     // tree_dump_func(val, __FILE__, __func__, __LINE__, "Before ret GetP node %zu", *pos);
     return val;
 }

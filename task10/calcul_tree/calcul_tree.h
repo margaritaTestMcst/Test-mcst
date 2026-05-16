@@ -5,7 +5,4 @@
 #include "../metki/metki.h"
 
 void CalcTreeExpression(TreeNode_t* node, metki* mtk, int* result, TreeErr_t* err);
-
-void TreeOptimize(TreeNode_t **node, TreeErr_t* err);
-
 #endif //CALCUL_TREE_H

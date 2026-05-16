@@ -3,7 +3,7 @@
 #include "../../tree/tree.h"
 #include "../../tree/tree_func.h"
 #include "../../tree/mistakes.h"
-#include "../debug_output/graphviz_dump.h"
+#include "../../debug_output/graphviz_dump.h"
 #include "../../include/operators_func.h"
 #include "../common/tokens.h"
 
