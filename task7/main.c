@@ -4,6 +4,8 @@
 #include <unistd.h>
 #include <fcntl.h>
 
+#include "file_work/file_work.h"
+
 int main(int argc, char *argv[]) {
     if(argc != 2){
         fprintf(stderr, "Usage: <program> <file_path>\n");
@@ -34,8 +36,8 @@ int main(int argc, char *argv[]) {
         int status = 0;
         waitpid(child_pid, &status, 0); 
 
-        put_result_so_stderr("Parent", "parent_copy");
-        put_result_so_stderr("Child", "child_copy");
+        put_result_so_stdout("Parent", "parent_copy");
+        put_result_so_stdout("Child", "child_copy");
     }
     
 }
