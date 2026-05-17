@@ -23,7 +23,7 @@ static void signal_sigint_handler(int signum){
 }
 
 __attribute__((always_inline))
-static void set_sigint_signal(){
+static inline void set_sigint_signal(){
     signal(SIGINT, signal_sigint_handler);
 }
 

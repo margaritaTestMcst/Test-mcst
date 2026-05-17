@@ -2,15 +2,15 @@
 #include <unistd.h>
 #include "write.h"
 
-static void append_symbol(char* buffer, int* pos, char symb);
+static void append_symbol(char* buffer, size_t* pos, char symb);
 
-static void append_digit(char* buffer, sig_atomic_t value, int* pos);
+static void append_digit(char* buffer, sig_atomic_t value, size_t* pos);
 
-static void append_idx(char* buffer, int* pos, sig_atomic_t value1, sig_atomic_t value2);
+static void append_idx(char* buffer, size_t* pos, sig_atomic_t value1, sig_atomic_t value2);
 
 void write_idx(sig_atomic_t i, sig_atomic_t j, sig_atomic_t k){
     char buffer[100] = {};
-    int pos = 0;
+    size_t pos = 0;
 
     append_idx(buffer, &pos, i + 1, k + 1);
     append_idx(buffer, &pos, k + 1, j + 1);
@@ -19,7 +19,7 @@ void write_idx(sig_atomic_t i, sig_atomic_t j, sig_atomic_t k){
     write(STDOUT_FILENO, buffer,pos);
 }
 
-static void append_symbol(char* buffer, int* pos, char symb){
+static void append_symbol(char* buffer, size_t* pos, char symb){
     assert(buffer);
     assert(pos);
 
@@ -27,7 +27,7 @@ static void append_symbol(char* buffer, int* pos, char symb){
     (*pos)++;
 }
 
-static void append_digit(char* buffer, sig_atomic_t value, int* pos){
+static void append_digit(char* buffer, sig_atomic_t value, size_t* pos){
     assert(buffer);
     assert(pos);
     
@@ -50,7 +50,7 @@ static void append_digit(char* buffer, sig_atomic_t value, int* pos){
     }
 }
 
-static void append_idx(char* buffer, int* pos, sig_atomic_t value1, sig_atomic_t value2){
+static void append_idx(char* buffer, size_t* pos, sig_atomic_t value1, sig_atomic_t value2){
     assert(buffer);
     assert(pos);
 

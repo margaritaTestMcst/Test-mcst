@@ -7,6 +7,7 @@ void fill_matr(int (*A)[MATRIX_SIZE], int (*B)[MATRIX_SIZE], int (*C)[MATRIX_SIZ
         for(int j = 0; j < MATRIX_SIZE; j++){
             A[i][j] = 100;
             B[i][j] = 100;
+            C[i][j] = 0;
         }
     }
 }
