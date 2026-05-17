@@ -5,18 +5,19 @@
 #include <fcntl.h>
 
 void copy_to_process_file(int src_file, const char* dst){
-    int dst_fp = open(dst, O_WRONLY);
+    int dst_fp = open(dst, O_WRONLY | O_CREAT | O_TRUNC, 0644);
     if(dst_fp == -1){
+        perror(dst);
         fprintf(stderr, "Can't open file for write\n");
         return;
     }
 
     char* tmp_buf = (char*)calloc(PART_SIZE, sizeof(char));
     off_t offset = 0;
-    int symb_read = pread(src_file, tmp_buf, PART_SIZE, offset);
+    ssize_t symb_read = pread(src_file, tmp_buf, PART_SIZE, offset);
 
     while(symb_read){
-        write(dst_fp, tmp_buf, symb_read);
+        write(dst_fp, tmp_buf, (size_t)symb_read);
 
         offset+=symb_read;
         symb_read = pread(src_file, tmp_buf, PART_SIZE, offset);
@@ -36,14 +37,15 @@ void put_result_so_stdout(const char* str, const char* src){
 
     printf("%s:\n", str);
     char* tmp_buf = (char*)calloc(PART_SIZE, sizeof(char));
-    int symb_read = read(src_file, tmp_buf, PART_SIZE);
+    ssize_t symb_read = read(src_file, tmp_buf, PART_SIZE);
 
     while(symb_read){
-        write(STDOUT_FILENO, tmp_buf, symb_read);
+        write(STDOUT_FILENO, tmp_buf, (size_t)symb_read);
 
         symb_read = read(src_file, tmp_buf, PART_SIZE);
     }
 
+    printf("\n");
     free(tmp_buf);
     close(src_file);
 
