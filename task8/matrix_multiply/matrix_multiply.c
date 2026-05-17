@@ -2,7 +2,7 @@
 #include "../sigint_handlers/handlers.h"
 #include <unistd.h>
 
-void init_matr(int (*A)[MATRIX_SIZE], int (*B)[MATRIX_SIZE], int (*C)[MATRIX_SIZE]){
+void fill_matr(int (*A)[MATRIX_SIZE], int (*B)[MATRIX_SIZE], int (*C)[MATRIX_SIZE]){
     for(int i = 0; i < MATRIX_SIZE; i++){
         for(int j = 0; j < MATRIX_SIZE; j++){
             A[i][j] = 100;
